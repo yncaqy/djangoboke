@@ -145,7 +145,7 @@ EMAIL_HOST = 'smtp.qq.com'
 # 邮箱名
 EMAIL_HOST_USER = '3440971032@qq.com'
 # 密码
-EMAIL_HOST_PASSWORD = 'upnynklmunaycgjc'
+EMAIL_HOST_PASSWORD = ''
 # 发送邮件端口
 EMAIL_PORT = 25
 # 是否使用TLS
