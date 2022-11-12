@@ -1,0 +1,51 @@
+{% extends 'base.html' %} {% load static %}
+{% block title %} 更新文章 {% endblock title %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <br>
+            <!--enctype="multipart/form-data"这个属性的意思是表单提交时不对字符编码。表单里带有文件时，一定要加上它。-->
+            <form action="." method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!--文章标题-->
+                <div class="form-group">
+                    <label for="title"> 文章标题 </label>
+                    <!--在value属性指定文本框的初始值为旧的内容，即article对象中的title字段-->
+                    <input type="text" class="form-control" id="title" name="title" value="{{ article.title }}">
+                </div>
+                <!--文章栏目-->
+                <div class="form-group">
+                    <label for="column">栏目</label>
+                    <select name="column" id="column" class="form-control">
+                        <option value="none">请选择栏目..</option>
+                        {% for column in columns %}
+                            <option value="{{ column.id }}"
+                            {% if column.id == article.column.id %}
+                                selected
+                            {% endif %}>
+                            {{ column }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <!--文章标题图-->
+                <div class="form-group">
+                    <label for="avatar">标题图</label>
+                    <input type="file" class="form-control-file" name="avatar" id="avatar">
+                </div>
+                <!--文章标签-->
+                <div class="form-group">
+                    <label for="tags">标签</label>
+                    <input type="text" class="form-control col-3" id="tags" name="tags" value="{{ tags }}">
+                </div>
+                <!--文章正文-->
+                <div class="form-group">
+                    <label for="body"> 文章正文 </label>
+                    <!--文本域不需要value属性，直接在标签中嵌入数据即可-->
+                    <textarea name="body" id="body" rows="12" class="form-control" type="text">{{ article.body }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary"> 完成 </button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
